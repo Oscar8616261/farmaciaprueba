@@ -1,48 +1,48 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Farmacia - Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center blur-md opacity-90" style="background-image: url('/img/fondo1.jpg');"></div>
+    <div class="relative bg-white rounded-lg shadow-xl overflow-hidden flex max-w-3xl w-full min-h-[400px]">
+        <!-- Sección de la imagen -->
+        <div class="flex-[6] bg-contain bg-center bg-no-repeat bg-gray-100" style="background-image: url('/img/escudo.png')"></div>
 
-        <x-validation-errors class="mb-4" />
-
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
+        <!-- Sección del formulario -->
+        <div class="flex-[4] flex justify-center items-center p-8">
+            <div class="w-full max-w-md">
+                <div class="flex flex-col items-center mb-6">
+                    <img src="/img/logo.png" alt="Logo Farmacia" class="w-20 h-20 mb-4">
+                    <h2 class="text-3xl font-extrabold text-brown-800 text-center">LIMBERTHPOOL</h2>
+                </div>
+                <h2 class="text-center text-xl font-semibold text-brown-700 mb-4">Iniciar Sesión</h2>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-6">
+                        <label for="usuario" class="block text-brown-700 font-medium">Usuario</label>
+                        <input type="text" name="usuario" id="usuario" class="w-full border-2 border-brown-600 rounded-lg px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="contrasena" class="block text-brown-700 font-medium">Contraseña</label>
+                        <input type="password" name="contrasena" id="contrasena" class="w-full border-2 border-brown-600 rounded-lg px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200" required>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">
+                        Iniciar Sesión
+                    </button>
+                </form>
             </div>
-        @endsession
+        </div>
+    </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+</body>
+</html>
